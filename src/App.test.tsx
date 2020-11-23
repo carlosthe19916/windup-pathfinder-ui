@@ -1,9 +1,21 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import App from "./App";
+import configureStore from "./store";
+import { initApi } from "axios-config";
+
+it("renders without crashing", () => {
+  const div = document.createElement("div");
+
+  initApi();
+
+  ReactDOM.render(
+    <Provider store={configureStore()}>
+      <App />,
+    </Provider>,
+    div
+  );
+  ReactDOM.unmountComponentAtNode(div);
 });
