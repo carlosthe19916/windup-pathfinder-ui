@@ -89,8 +89,8 @@ jobs:
     - name: Upload .rpm
       uses: actions/upload-artifact@v1
       with:
-        name: windup.amd64.rpm
-        path: 'windup.amd64.rpm'
+        name: windup.x86_64.rpm
+        path: 'windup.x86_64.rpm'
 
   electron-windows:
     runs-on: windows-latest
@@ -105,3 +105,10 @@ jobs:
     - name: Rename distribution
       run: |
         ls out/make/
+    - name: Rename distribution
+      run: mv out/make/**/**/windup** windup.nuspec
+    - name: Upload .nuspec
+      uses: actions/upload-artifact@v1
+      with:
+        name: windup.nuspec
+        path: 'windup.nuspec'

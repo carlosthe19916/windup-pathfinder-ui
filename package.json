@@ -2,6 +2,7 @@
   "name": "windup",
   "version": "0.1.0",
   "description": "Windup - upstream project for Red Hat Application Migration Toolkit",
+  "author": "Carlos Feria <carlosthe19916@gmail.com> (https://github.com/carlosthe19916)",
   "main": "public/electron.js",
   "homepage": "./",
   "private": true,
@@ -58,7 +59,7 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "concurrently": "^5.3.0",
     "electron": "^11.0.1",
-    "electron-devtools-installer": "^3.1.1",    
+    "electron-devtools-installer": "^3.1.1",
     "wait-on": "^5.2.0"
   },
   "config": {
