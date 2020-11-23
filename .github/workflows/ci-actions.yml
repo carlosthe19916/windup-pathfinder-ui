@@ -66,3 +66,30 @@ jobs:
   #   - uses: codecov/codecov-action@v1
   #     with:
   #       flags: e2etests
+
+  electron:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: yarn install
+    - run: yarn run make
+    - name: Rename distribution
+      run: |
+        mv out/make/deb/x64/windup*.deb windup.amd64.deb
+        mv out/make/rpm/x64/windup*.rpm windup.x86_64.rpm
+    - name: Upload .deb
+      uses: actions/upload-artifact@v1
+      with:
+        name: windup.amd64.deb
+        path: 'windup.amd64.deb'
+    - name: Upload .rpm
+      uses: actions/upload-artifact@v1
+      with:
+        name: windup.amd64.rpm
+        path: 'windup.amd64.rpm'
