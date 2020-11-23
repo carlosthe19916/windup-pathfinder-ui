@@ -67,10 +67,8 @@ jobs:
   #     with:
   #       flags: e2etests
 
-  electron:
-
+  electron-linux:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
@@ -93,3 +91,17 @@ jobs:
       with:
         name: windup.amd64.rpm
         path: 'windup.amd64.rpm'
+
+  electron-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: yarn install --network-timeout 1000000
+    - run: yarn run make
+    - name: Rename distribution
+      run: |
+        ls out/make/
