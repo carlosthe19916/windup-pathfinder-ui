@@ -91,24 +91,3 @@ jobs:
       with:
         name: windup.x86_64.rpm
         path: 'windup.x86_64.rpm'
-
-  electron-windows:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - run: yarn install --network-timeout 1000000
-    - run: yarn run make
-    - name: Rename distribution
-      run: |
-        ls out/make/
-    - name: Rename distribution
-      run: mv out/make/**/**/windup** windup.nuspec
-    - name: Upload .nuspec
-      uses: actions/upload-artifact@v1
-      with:
-        name: windup.nuspec
-        path: 'windup.nuspec'
