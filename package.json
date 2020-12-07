@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "description": "Windup - upstream project for Red Hat Application Migration Toolkit",
   "author": "Carlos Feria <carlosthe19916@gmail.com> (https://github.com/carlosthe19916)",
-  "main": "public/electron.js",
-  "homepage": "./",
+  "main": "electron/main.js",
   "private": true,
+  "proxy": "http://localhost:8080",
+  "homepage": "./",
   "license": "EPL-2.0",
   "dependencies": {
     "@patternfly/patternfly": "^4.65.6",
@@ -37,17 +38,23 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
     "electron": "wait-on tcp:3000 && electron-forge start",
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
+    "build:instrumentation": "CYPRESS_INSTRUMENT_PRODUCTION=true react-scripts -r @cypress/instrument-cra build",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject",
     "package": "react-scripts build && electron-forge package",
     "make": "react-scripts build && electron-forge make",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "windup:all": "npm-run-all --parallel windup:backend windup:ui",
+    "windup:backend": "docker run -p 8080:8080 quay.io/carlosthe19916/windup-pathfinder:master",
+    "windup:ui": "scripts/ui.sh"
   },
   "eslintConfig": {
     "extends": [
@@ -67,6 +74,13 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!src/**/*.stories.*"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -78,6 +92,7 @@
     ]
   },
   "devDependencies": {
+    "@cypress/instrument-cra": "^1.4.0",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
@@ -95,13 +110,16 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/redux-logger": "^3.0.8",
     "concurrently": "^5.3.0",
+    "cypress": "^5.6.0",
     "electron": "^11.0.1",
     "electron-devtools-installer": "^3.1.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "http-proxy-middleware": "^1.0.6",
     "jest-enzyme": "^7.1.2",
     "lint-staged": "^10.5.1",
     "node-sass": "4.14.1",
+    "npm-run-all": "^4.1.5",
     "react-test-renderer": "16.13.1",
     "redux-devtools-extension": "^2.13.8",
     "wait-on": "^5.2.0"
@@ -109,14 +127,14 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "src/icons/mac/icon.icns",
+        "icon": "electron/icons/mac/icon.icns",
         "name": "windup"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "windup_pathfinder_ui"
+            "name": "windup"
           }
         },
         {

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome Renders without crashing 1`] = `
+<Bullseye>
+  <EmptyState
+    variant="large"
+  >
+    <EmptyStateIcon
+      icon={[Function]}
+    />
+    <Title
+      headingLevel="h4"
+      size="lg"
+    >
+      The execution you are trying to load is not valid
+    </Title>
+    <EmptyStateBody>
+      The execution folder must have a
+       
+      <strong>
+        TitanConfiguration.properties
+      </strong>
+       file and
+       
+      <strong>
+        graphsearch
+      </strong>
+       and 
+      <strong>
+        titangraph
+      </strong>
+       folders.
+    </EmptyStateBody>
+  </EmptyState>
+</Bullseye>
+`;

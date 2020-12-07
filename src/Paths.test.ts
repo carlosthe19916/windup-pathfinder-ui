@@ -2,16 +2,16 @@ import { formatPath, Paths } from "Paths";
 
 describe("Paths", () => {
   it("Test correct formatPath", () => {
-    const result = formatPath(Paths.applicationList, {
-      report: "myId",
+    const result = formatPath(Paths.executions, {
+      execution: "myId",
     });
-    expect(result).toEqual("/reports/myId/applications");
+    expect(result).toEqual("/executions/myId");
   });
 
   it("Test incorrect formatPath", () => {
-    const result = formatPath(Paths.applicationList, {
+    const result = formatPath(Paths.executions, {
       incorrectVar: "myId",
     });
-    expect(result).toEqual("/reports/:report/applications");
+    expect(result).toEqual("/executions/:execution");
   });
 });

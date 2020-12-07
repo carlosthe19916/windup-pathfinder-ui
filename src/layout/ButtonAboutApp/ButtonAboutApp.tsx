@@ -58,7 +58,7 @@ export class ButtonAboutApp extends React.Component<
             <TextList component="dl">
               <TextListItem component="dt">Source code</TextListItem>
               <TextListItem component="dd">
-                <a href="https://github.com/project-openubl/xsender-server-ui">
+                <a href="https://github.com/carlosthe19916/windup-pathfinder">
                   Github
                 </a>
               </TextListItem>

@@ -1,12 +1,11 @@
-import { AxiosPromise } from "axios";
 import { APIClient } from "axios-config";
 
 import { ApplicationRepresentation } from "./models";
 
-const APPLICATIONS = "/reports/{reportId}/applications";
+const APPLICATIONS = "/execution/{executionId}/applications";
 
-export const getApplications = (reportId: string) => {
-  return APIClient.get<ApplicationRepresentation>(
-    APPLICATIONS.replace("{reportId}", reportId)
+export const getApplications = (executionId: string) => {
+  return APIClient.get<ApplicationRepresentation[]>(
+    APPLICATIONS.replace("{executionId}", executionId)
   );
 };

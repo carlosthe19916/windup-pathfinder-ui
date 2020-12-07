@@ -5,9 +5,7 @@ import { Welcome } from "../welcome";
 export default {
   title: "Components / Welcome",
   component: Welcome,
-  argTypes: {
-    onPrimaryAction: { action: "clicked" },
-  },
+  argTypes: {},
 } as Meta;
 
 const Template: Story = (args) => <Welcome {...args} />;

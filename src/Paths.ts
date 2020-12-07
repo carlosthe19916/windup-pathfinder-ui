@@ -12,13 +12,14 @@ export enum Paths {
   base = "/",
   notFound = "/not-found",
 
-  applicationList = "/reports/:report/applications",
+  welcome = "/welcome",
+  invalidExecution = "/invalid-execution",
+  executions = "/executions/:execution",
+
+  applications = "/executions/:execution/applications",
+  technologies = "/executions/:execution/technologies",
 }
 
-export interface OptionalCompanyRoute {
-  company?: string;
-}
-
-export interface CompanytRoute {
-  company: string;
+export interface ExecutionRoute {
+  execution: string;
 }

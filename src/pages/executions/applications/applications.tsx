@@ -8,16 +8,10 @@ const ApplicationList = lazy(() => import("./application-list"));
 
 export const Applications: React.FC = () => {
   return (
-    <>
-      <Suspense fallback={<AppPlaceholder />}>
-        <Switch>
-          <Route
-            path={Paths.applicationList}
-            component={ApplicationList}
-            exact
-          />
-        </Switch>
-      </Suspense>
-    </>
+    <Suspense fallback={<AppPlaceholder />}>
+      <Switch>
+        <Route path={Paths.applications} component={ApplicationList} exact />
+      </Switch>
+    </Suspense>
   );
 };
